@@ -1,0 +1,85 @@
+---
+import '../styles/main.css';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>グラフジェネレーター</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple Graph generator</h1>
+
+      <div class="card">
+        <div class="info">使い方: ラベルと数値をカンマ区切りで入力してください</div>
+
+        <div class="input-section">
+          <div class="input-group">
+            <label for="chartType">グラフ種類:</label>
+            <select id="chartType">
+              <option value="bar">棒グラフ</option>
+              <option value="line">折れ線グラフ</option>
+              <option value="pie">円グラフ</option>
+              <option value="doughnut">ドーナツグラフ</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="chartTitle">タイトル:</label>
+            <input
+              type="text"
+              id="chartTitle"
+              placeholder="グラフのタイトル"
+              value="データ可視化"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="labels">ラベル:</label>
+            <textarea id="labels" placeholder="カンマ区切り (例: A,B,C)"
+              >1月,2月,3月,4月,5月,6月</textarea
+            >
+          </div>
+
+          <div class="input-group">
+            <label for="data">数値:</label>
+            <textarea id="data" placeholder="カンマ区切り (例: 10,20,30)">12,19,3,5,2,3</textarea>
+          </div>
+
+          <button id="generateBtn">グラフを生成</button>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="download-section">
+          <h3>ダウンロード</h3>
+          <div class="size-selector">
+            <label for="imageSize">画像サイズ:</label>
+            <select id="imageSize">
+              <option value="1">1x (800x400)</option>
+              <option value="2" selected>2x (1600x800)</option>
+              <option value="3">3x (2400x1200)</option>
+              <option value="4">4x (3200x1600)</option>
+            </select>
+          </div>
+          <div class="download-buttons">
+            <button id="downloadPNG" class="download-btn">PNG形式でダウンロード</button>
+            <button id="downloadJPG" class="download-btn">JPG形式でダウンロード</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      import { initChart } from '../lib/chart';
+      initChart();
+    </script>
+  </body>
+</html>
