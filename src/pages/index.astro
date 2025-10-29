@@ -1,6 +1,5 @@
 ---
 import '../styles/globals.css';
-import '../styles/main.css';
 import { ChartForm } from '../components/ChartForm';
 ---
 
@@ -27,29 +26,7 @@ import { ChartForm } from '../components/ChartForm';
         <div class="chart-container">
           <canvas id="myChart"></canvas>
         </div>
-
-        <div class="download-section">
-          <h3>ダウンロード</h3>
-          <div class="size-selector">
-            <label for="imageSize">画像サイズ:</label>
-            <select id="imageSize">
-              <option value="1">1x (800x400)</option>
-              <option value="2" selected>2x (1600x800)</option>
-              <option value="3">3x (2400x1200)</option>
-              <option value="4">4x (3200x1600)</option>
-            </select>
-          </div>
-          <div class="download-buttons">
-            <button id="downloadPNG" class="download-btn">PNG形式でダウンロード</button>
-            <button id="downloadJPG" class="download-btn">JPG形式でダウンロード</button>
-          </div>
-        </div>
       </div>
     </div>
-
-    <script>
-      import { initChart } from '../lib/chart';
-      initChart();
-    </script>
   </body>
 </html>
