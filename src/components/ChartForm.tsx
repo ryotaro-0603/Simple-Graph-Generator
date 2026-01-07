@@ -28,6 +28,8 @@ export function ChartForm() {
   const [chartType, setChartType] = useState('bar');
   const [colorScheme, setColorScheme] = useState('default');
   const [chartTitle, setChartTitle] = useState('データ可視化');
+  const [yAxisMin, setYAxisMin] = useState('');
+  const [yAxisMax, setYAxisMax] = useState('');
   const [dataEntries, setDataEntries] = useState<DataEntry[]>([
     { id: '1', label: '1月', value: '12' },
     { id: '2', label: '2月', value: '19' },
@@ -183,6 +185,14 @@ export function ChartForm() {
             padding: { bottom: 20 },
           },
         },
+        scales: ['bar', 'line'].includes(chartType)
+          ? {
+              y: {
+                min: yAxisMin ? parseFloat(yAxisMin) : undefined,
+                max: yAxisMax ? parseFloat(yAxisMax) : undefined,
+              },
+            }
+          : undefined,
       },
     };
 
@@ -261,6 +271,41 @@ export function ChartForm() {
         />
       </div>
 
+      {['bar', 'line'].includes(chartType) && (
+        <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-2">
+            <Label
+              htmlFor="yAxisMin"
+              className="text-sm font-semibold text-gray-700"
+            >
+              Y軸最小値
+            </Label>
+            <Input
+              type="number"
+              placeholder="自動"
+              value={yAxisMin}
+              onChange={(e) => setYAxisMin(e.target.value)}
+              className="h-11"
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label
+              htmlFor="yAxisMax"
+              className="text-sm font-semibold text-gray-700"
+            >
+              Y軸最大値
+            </Label>
+            <Input
+              type="number"
+              placeholder="自動"
+              value={yAxisMax}
+              onChange={(e) => setYAxisMax(e.target.value)}
+              className="h-11"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="grid gap-3">
         <div className="flex items-center justify-between mb-1">
           <Label className="text-sm font-semibold text-gray-700">
@@ -275,7 +320,7 @@ export function ChartForm() {
           {dataEntries.map((entry, index) => (
             <div
               key={entry.id}
-              className="flex gap-2 items-center p-3 rounded-lg bg-neutral-100 border border-gray-200 hover:border-purple-300 hover:shadow-sm transition-all"
+              className="flex gap-2 items-center p-3 rounded-lg bg-neutral-100 border border-gray-200 hover:border-neutral-300 transition-all"
             >
               <div className="flex items-center justify-center w-5 h-5 rounded-full bg-neutral-800 text-white font-semibold text-xs">
                 {index + 1}
@@ -305,7 +350,7 @@ export function ChartForm() {
                 variant="ghost"
                 size="sm"
                 disabled={dataEntries.length === 1}
-                className="h-10 w-10 p-0 hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
+                className="size-8 p-0 hover:bg-neutral-300 cursor-pointer"
               >
                 ×
               </Button>
