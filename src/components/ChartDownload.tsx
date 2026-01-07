@@ -21,23 +21,39 @@ export function ChartDownload() {
     }
 
     const scale = parseFloat(imageSize);
-    const originalWidth = canvas.width;
-    const originalHeight = canvas.height;
 
+    // キャンバスの実際のピクセルサイズを取得
+    const sourceWidth = canvas.width;
+    const sourceHeight = canvas.height;
+
+    // 高解像度キャンバスを作成
     const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = originalWidth * scale;
-    tempCanvas.height = originalHeight * scale;
+    tempCanvas.width = sourceWidth * scale;
+    tempCanvas.height = sourceHeight * scale;
     const tempCtx = tempCanvas.getContext('2d')!;
+
+    // スムージングを無効化してシャープに
+    tempCtx.imageSmoothingEnabled = false;
 
     // 白い背景を追加
     tempCtx.fillStyle = '#ffffff';
     tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
 
-    tempCtx.scale(scale, scale);
-    tempCtx.drawImage(canvas, 0, 0);
+    // スケールを適用して描画
+    tempCtx.drawImage(
+      canvas,
+      0,
+      0,
+      sourceWidth,
+      sourceHeight,
+      0,
+      0,
+      tempCanvas.width,
+      tempCanvas.height
+    );
 
     const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
-    const quality = format === 'jpg' ? 0.95 : undefined;
+    const quality = format === 'jpg' ? 1.0 : undefined;
     const url = tempCanvas.toDataURL(mimeType, quality);
 
     const link = document.createElement('a');
