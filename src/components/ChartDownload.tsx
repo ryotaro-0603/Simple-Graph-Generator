@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import { Select } from './ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 interface ChartDownloadProps {
   chartRef: React.MutableRefObject<any>;
@@ -18,7 +24,7 @@ export function ChartDownload({ chartRef }: ChartDownloadProps) {
 
     const scale = parseFloat(imageSize);
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    
+
     if (!canvas) {
       alert('キャンバスが見つかりません');
       return;
@@ -56,15 +62,16 @@ export function ChartDownload({ chartRef }: ChartDownloadProps) {
         <Label htmlFor="imageSize" className="font-semibold min-w-[100px] text-gray-700">
           画像サイズ:
         </Label>
-        <Select
-          id="imageSize"
-          value={imageSize}
-          onChange={(e) => setImageSize(e.target.value)}
-        >
-          <option value="1">1x (800x400)</option>
-          <option value="2">2x (1600x800)</option>
-          <option value="3">3x (2400x1200)</option>
-          <option value="4">4x (3200x1600)</option>
+        <Select value={imageSize} onValueChange={setImageSize}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="1">1x (800x400)</SelectItem>
+            <SelectItem value="2">2x (1600x800)</SelectItem>
+            <SelectItem value="3">3x (2400x1200)</SelectItem>
+            <SelectItem value="4">4x (3200x1600)</SelectItem>
+          </SelectContent>
         </Select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

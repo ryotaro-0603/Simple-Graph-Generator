@@ -12,14 +12,20 @@ import { ChartForm } from '../components/ChartForm';
     <title>グラフジェネレーター</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-700 p-8 md:p-4 font-sans text-gray-900">
+  <body class="min-h-screen bg-neutral-100 font-sans text-gray-900">
     <div class="max-w-7xl mx-auto">
-      <h1 class="text-white text-center mb-12 text-5xl md:text-3xl font-bold tracking-tight drop-shadow-lg">
+      <h1
+        class="text-white text-center mb-12 text-5xl md:text-3xl font-bold tracking-tight drop-shadow-lg"
+      >
         Simple Graph generator
       </h1>
 
-      <div class="bg-white/98 backdrop-blur-lg rounded-3xl md:rounded-2xl p-12 md:p-6 shadow-2xl border border-white/20">
-        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-5 rounded-xl mb-8 text-gray-700 text-sm font-medium border-l-4 border-purple-600">
+      <div
+        class="bg-white/98 backdrop-blur-lg rounded-3xl md:rounded-2xl p-12 md:p-6 shadow-2xl border border-white/20"
+      >
+        <div
+          class="bg-gradient-to-r from-purple-50 to-indigo-50 p-5 rounded-xl mb-8 text-gray-700 text-sm font-medium border-l-4 border-purple-600"
+        >
           使い方: ラベルと数値を個別に入力してグラフを生成できます
         </div>
 
@@ -27,7 +33,9 @@ import { ChartForm } from '../components/ChartForm';
           <ChartForm client:load />
         </div>
 
-        <div class="relative h-[500px] md:h-[350px] mt-12 md:mt-8 p-8 md:p-4 bg-gradient-to-b from-gray-50 to-white rounded-2xl border border-gray-200">
+        <div
+          class="relative h-[500px] md:h-[350px] mt-12 md:mt-8 p-8 md:p-4 bg-gradient-to-b from-gray-50 to-white rounded-2xl border border-gray-200"
+        >
           <canvas id="myChart"></canvas>
         </div>
       </div>

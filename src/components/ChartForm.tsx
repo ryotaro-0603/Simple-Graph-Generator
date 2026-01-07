@@ -2,7 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Select } from './ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 import { ChartDownload } from './ChartDownload';
 
 declare global {
@@ -195,15 +203,16 @@ export function ChartForm() {
             >
               グラフ種類
             </Label>
-            <Select
-              id="chartType"
-              value={chartType}
-              onChange={(e) => setChartType(e.target.value)}
-            >
-              <option value="bar">棒グラフ</option>
-              <option value="line">折れ線グラフ</option>
-              <option value="pie">円グラフ</option>
-              <option value="doughnut">ドーナツグラフ</option>
+            <Select value={chartType} onValueChange={setChartType}>
+              <SelectTrigger>
+                <SelectValue placeholder="グラフ種類を選択" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="bar">棒グラフ</SelectItem>
+                <SelectItem value="line">折れ線グラフ</SelectItem>
+                <SelectItem value="pie">円グラフ</SelectItem>
+                <SelectItem value="doughnut">ドーナツグラフ</SelectItem>
+              </SelectContent>
             </Select>
           </div>
 
@@ -214,19 +223,38 @@ export function ChartForm() {
             >
               カラースキーム
             </Label>
-            <Select
-              id="colorScheme"
-              value={colorScheme}
-              onChange={(e) => setColorScheme(e.target.value)}
-            >
-              <option value="default">デフォルト（レインボー）</option>
-              <option value="blue">ブルー系</option>
-              <option value="green">グリーン系</option>
-              <option value="warm">暖色系</option>
-              <option value="cool">寒色系</option>
-              <option value="pastel">パステル</option>
-              <option value="vivid">ビビッド</option>
-              <option value="monochrome">モノクローム</option>
+            <Select value={colorScheme} onValueChange={setColorScheme}>
+              <SelectTrigger>
+                <SelectValue placeholder="カラースキームを選択" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">
+                  デフォルト（レインボー）
+                </SelectItem>
+                <SelectItem value="blue">ブルー系</SelectItem>
+                <SelectItem value="green">グリーン系</SelectItem>
+                <SelectItem value="warm">暖色系</SelectItem>
+                <SelectItem value="cool">寒色系</SelectItem>
+                <SelectItem value="pastel">パステル</SelectItem>
+                <SelectItem value="vivid">ビビッド</SelectItem>
+                <SelectItem value="monochrome">モノクローム</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
             </Select>
           </div>
 
