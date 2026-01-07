@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from './ui/select';
+import { Select } from './ui/select';
 
 interface ChartDownloadProps {
   chartRef: React.MutableRefObject<any>;
@@ -56,32 +50,33 @@ export function ChartDownload({ chartRef }: ChartDownloadProps) {
   };
 
   return (
-    <div className="download-section">
-      <h3>ダウンロード</h3>
-      <div className="size-selector">
-        <Label htmlFor="imageSize">画像サイズ:</Label>
-        <Select value={imageSize} onValueChange={setImageSize}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">1x (800x400)</SelectItem>
-            <SelectItem value="2">2x (1600x800)</SelectItem>
-            <SelectItem value="3">3x (2400x1200)</SelectItem>
-            <SelectItem value="4">4x (3200x1600)</SelectItem>
-          </SelectContent>
+    <div className="mt-12 pt-12 border-t-2 border-gray-200">
+      <h3 className="text-gray-800 mb-6 text-xl font-semibold">ダウンロード</h3>
+      <div className="flex gap-3 items-center mb-6">
+        <Label htmlFor="imageSize" className="font-semibold min-w-[100px] text-gray-700">
+          画像サイズ:
+        </Label>
+        <Select
+          id="imageSize"
+          value={imageSize}
+          onChange={(e) => setImageSize(e.target.value)}
+        >
+          <option value="1">1x (800x400)</option>
+          <option value="2">2x (1600x800)</option>
+          <option value="3">3x (2400x1200)</option>
+          <option value="4">4x (3200x1600)</option>
         </Select>
       </div>
-      <div className="download-buttons">
-        <Button 
-          onClick={() => downloadImage('png')} 
-          className="download-btn"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Button
+          onClick={() => downloadImage('png')}
+          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
         >
           PNG形式でダウンロード
         </Button>
-        <Button 
-          onClick={() => downloadImage('jpg')} 
-          className="download-btn"
+        <Button
+          onClick={() => downloadImage('jpg')}
+          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
         >
           JPG形式でダウンロード
         </Button>
