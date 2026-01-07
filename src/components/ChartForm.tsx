@@ -211,155 +211,159 @@ export function ChartForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <Label
-          htmlFor="chartType"
-          className="text-sm font-semibold text-gray-700"
-        >
-          グラフ種類
-        </Label>
-        <Select value={chartType} onValueChange={setChartType}>
-          <SelectTrigger>
-            <SelectValue placeholder="グラフ種類を選択" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="bar">棒グラフ</SelectItem>
-            <SelectItem value="line">折れ線グラフ</SelectItem>
-            <SelectItem value="pie">円グラフ</SelectItem>
-            <SelectItem value="doughnut">ドーナツグラフ</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="flex justify-between items-center">
-        <Label
-          htmlFor="colorScheme"
-          className="text-sm font-semibold text-gray-700"
-        >
-          カラースキーム
-        </Label>
-        <Select value={colorScheme} onValueChange={setColorScheme}>
-          <SelectTrigger>
-            <SelectValue placeholder="カラースキームを選択" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="default">デフォルト（レインボー）</SelectItem>
-            <SelectItem value="blue">ブルー系</SelectItem>
-            <SelectItem value="green">グリーン系</SelectItem>
-            <SelectItem value="warm">暖色系</SelectItem>
-            <SelectItem value="cool">寒色系</SelectItem>
-            <SelectItem value="pastel">パステル</SelectItem>
-            <SelectItem value="vivid">ビビッド</SelectItem>
-            <SelectItem value="monochrome">モノクローム</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="grid gap-2">
-        <Label
-          htmlFor="chartTitle"
-          className="text-sm font-semibold text-gray-700"
-        >
-          タイトル
-        </Label>
-        <Input
-          type="text"
-          placeholder="グラフのタイトル"
-          value={chartTitle}
-          onChange={(e) => setChartTitle(e.target.value)}
-          className="h-11"
-        />
-      </div>
-
-      {['bar', 'line'].includes(chartType) && (
-        <div className="grid grid-cols-2 gap-3">
-          <div className="grid gap-2">
-            <Label
-              htmlFor="yAxisMin"
-              className="text-sm font-semibold text-gray-700"
-            >
-              Y軸最小値
-            </Label>
-            <Input
-              type="number"
-              placeholder="自動"
-              value={yAxisMin}
-              onChange={(e) => setYAxisMin(e.target.value)}
-              className="h-11"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label
-              htmlFor="yAxisMax"
-              className="text-sm font-semibold text-gray-700"
-            >
-              Y軸最大値
-            </Label>
-            <Input
-              type="number"
-              placeholder="自動"
-              value={yAxisMax}
-              onChange={(e) => setYAxisMax(e.target.value)}
-              className="h-11"
-            />
-          </div>
-        </div>
-      )}
-
-      <div className="grid gap-3">
-        <div className="flex items-center justify-between mb-1">
-          <Label className="text-sm font-semibold text-gray-700">
-            データ入力
+      <div className="space-y-6 bg-white rounded-xl p-12 md:p-6 border border-neutral-200">
+        <div className="flex justify-between items-center">
+          <Label
+            htmlFor="chartType"
+            className="text-sm font-semibold text-gray-700"
+          >
+            グラフ種類
           </Label>
-          <Button onClick={addEntry} variant="outline">
-            項目を追加
-          </Button>
+          <Select value={chartType} onValueChange={setChartType}>
+            <SelectTrigger>
+              <SelectValue placeholder="グラフ種類を選択" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="bar">棒グラフ</SelectItem>
+              <SelectItem value="line">折れ線グラフ</SelectItem>
+              <SelectItem value="pie">円グラフ</SelectItem>
+              <SelectItem value="doughnut">ドーナツグラフ</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
-        <div className="space-y-3">
-          {dataEntries.map((entry, index) => (
-            <div
-              key={entry.id}
-              className="flex gap-2 items-center p-3 rounded-lg bg-neutral-100 border border-gray-200 hover:border-neutral-300 transition-all"
-            >
-              <div className="flex items-center justify-center w-5 h-5 rounded-full bg-neutral-800 text-white font-semibold text-xs">
-                {index + 1}
-              </div>
-              <div className="flex-1 grid grid-cols-2 gap-2">
-                <Input
-                  type="text"
-                  placeholder="ラベル"
-                  value={entry.label}
-                  onChange={(e) =>
-                    updateEntry(entry.id, 'label', e.target.value)
-                  }
-                  className="h-10"
-                />
-                <Input
-                  type="text"
-                  placeholder="数値"
-                  value={entry.value}
-                  onChange={(e) =>
-                    updateEntry(entry.id, 'value', e.target.value)
-                  }
-                  className="h-10"
-                />
-              </div>
-              <Button
-                onClick={() => removeEntry(entry.id)}
-                variant="ghost"
-                size="sm"
-                disabled={dataEntries.length === 1}
-                className="size-8 p-0 hover:bg-neutral-300 cursor-pointer"
-              >
-                ×
-              </Button>
-            </div>
-          ))}
+        <div className="flex justify-between items-center">
+          <Label
+            htmlFor="colorScheme"
+            className="text-sm font-semibold text-gray-700"
+          >
+            カラースキーム
+          </Label>
+          <Select value={colorScheme} onValueChange={setColorScheme}>
+            <SelectTrigger>
+              <SelectValue placeholder="カラースキームを選択" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="default">デフォルト（レインボー）</SelectItem>
+              <SelectItem value="blue">ブルー系</SelectItem>
+              <SelectItem value="green">グリーン系</SelectItem>
+              <SelectItem value="warm">暖色系</SelectItem>
+              <SelectItem value="cool">寒色系</SelectItem>
+              <SelectItem value="pastel">パステル</SelectItem>
+              <SelectItem value="vivid">ビビッド</SelectItem>
+              <SelectItem value="monochrome">モノクローム</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      <Button onClick={generateChart}>グラフを生成</Button>
+      <div className="space-y-6 bg-white rounded-xl p-12 md:p-6 border border-neutral-200">
+        <div className="grid gap-2">
+          <Label
+            htmlFor="chartTitle"
+            className="text-sm font-semibold text-gray-700"
+          >
+            タイトル
+          </Label>
+          <Input
+            type="text"
+            placeholder="グラフのタイトル"
+            value={chartTitle}
+            onChange={(e) => setChartTitle(e.target.value)}
+            className="h-11"
+          />
+        </div>
+
+        {['bar', 'line'].includes(chartType) && (
+          <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-2">
+              <Label
+                htmlFor="yAxisMin"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Y軸最小値
+              </Label>
+              <Input
+                type="number"
+                placeholder="自動"
+                value={yAxisMin}
+                onChange={(e) => setYAxisMin(e.target.value)}
+                className="h-11"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label
+                htmlFor="yAxisMax"
+                className="text-sm font-semibold text-gray-700"
+              >
+                Y軸最大値
+              </Label>
+              <Input
+                type="number"
+                placeholder="自動"
+                value={yAxisMax}
+                onChange={(e) => setYAxisMax(e.target.value)}
+                className="h-11"
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="grid gap-3">
+          <div className="flex items-center justify-between mb-1">
+            <Label className="text-sm font-semibold text-gray-700">
+              データ入力
+            </Label>
+            <Button onClick={addEntry} variant="outline">
+              項目を追加
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {dataEntries.map((entry, index) => (
+              <div
+                key={entry.id}
+                className="flex gap-2 items-center p-3 rounded-lg bg-neutral-100 border border-gray-200 hover:border-neutral-300 transition-all"
+              >
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-neutral-800 text-white font-semibold text-xs">
+                  {index + 1}
+                </div>
+                <div className="flex-1 grid grid-cols-2 gap-2">
+                  <Input
+                    type="text"
+                    placeholder="ラベル"
+                    value={entry.label}
+                    onChange={(e) =>
+                      updateEntry(entry.id, 'label', e.target.value)
+                    }
+                    className="h-10"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="数値"
+                    value={entry.value}
+                    onChange={(e) =>
+                      updateEntry(entry.id, 'value', e.target.value)
+                    }
+                    className="h-10"
+                  />
+                </div>
+                <Button
+                  onClick={() => removeEntry(entry.id)}
+                  variant="ghost"
+                  size="sm"
+                  disabled={dataEntries.length === 1}
+                  className="size-8 p-0 hover:bg-neutral-300 cursor-pointer"
+                >
+                  ×
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Button onClick={generateChart}>グラフを生成</Button>
+      </div>
     </div>
   );
 }
