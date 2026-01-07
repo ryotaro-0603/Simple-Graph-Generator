@@ -4,6 +4,7 @@
 export default {
   singleQuote: true,
   semi: true,
+  printWidth: 120,
   plugins: ['prettier-plugin-astro'],
   overrides: [
     {

@@ -9,27 +9,18 @@ import {
   SelectValue,
 } from './ui/select';
 
-interface ChartDownloadProps {
-  chartRef: React.MutableRefObject<any>;
-}
-
-export function ChartDownload({ chartRef }: ChartDownloadProps) {
+export function ChartDownload() {
   const [imageSize, setImageSize] = useState('2');
 
   const downloadImage = (format: 'png' | 'jpg') => {
-    if (!chartRef.current) {
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+
+    if (!canvas) {
       alert('まずグラフを生成してください');
       return;
     }
 
     const scale = parseFloat(imageSize);
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-
-    if (!canvas) {
-      alert('キャンバスが見つかりません');
-      return;
-    }
-
     const originalWidth = canvas.width;
     const originalHeight = canvas.height;
 
@@ -56,37 +47,33 @@ export function ChartDownload({ chartRef }: ChartDownloadProps) {
   };
 
   return (
-    <div className="mt-12 pt-12 border-t-2 border-gray-200">
-      <h3 className="text-gray-800 mb-6 text-xl font-semibold">ダウンロード</h3>
-      <div className="flex gap-3 items-center mb-6">
-        <Label htmlFor="imageSize" className="font-semibold min-w-[100px] text-gray-700">
-          画像サイズ:
-        </Label>
-        <Select value={imageSize} onValueChange={setImageSize}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">1x (800x400)</SelectItem>
-            <SelectItem value="2">2x (1600x800)</SelectItem>
-            <SelectItem value="3">3x (2400x1200)</SelectItem>
-            <SelectItem value="4">4x (3200x1600)</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Button
-          onClick={() => downloadImage('png')}
-          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
-        >
-          PNG形式でダウンロード
-        </Button>
-        <Button
-          onClick={() => downloadImage('jpg')}
-          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
-        >
-          JPG形式でダウンロード
-        </Button>
+    <div>
+      <h3 className="text-neutral-700 mb-6 text-xl font-semibold">Download</h3>
+      <div className="flex justify-between items-center">
+        <div className="flex gap-3 items-center">
+          <Label htmlFor="imageSize" className="font-semibold text-gray-700">
+            画像サイズ:
+          </Label>
+          <Select value={imageSize} onValueChange={setImageSize}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="1">1x (800x400)</SelectItem>
+              <SelectItem value="2">2x (1600x800)</SelectItem>
+              <SelectItem value="3">3x (2400x1200)</SelectItem>
+              <SelectItem value="4">4x (3200x1600)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex gap-4">
+          <Button onClick={() => downloadImage('png')}>
+            PNG形式でダウンロード
+          </Button>
+          <Button onClick={() => downloadImage('jpg')}>
+            JPG形式でダウンロード
+          </Button>
+        </div>
       </div>
     </div>
   );
