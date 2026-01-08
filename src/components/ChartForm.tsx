@@ -15,6 +15,7 @@ import {
 declare global {
   interface Window {
     Chart: any;
+    chartInstance?: any;
   }
 }
 
@@ -197,6 +198,7 @@ export function ChartForm() {
     };
 
     chartRef.current = new window.Chart(ctx, config);
+    window.chartInstance = chartRef.current;
   };
 
   useEffect(() => {
